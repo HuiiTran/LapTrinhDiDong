@@ -35,7 +35,12 @@ class Login extends Component<{}, {modalVisible: boolean}> {
             //onChangeText={newText2 => setHeight(parseFloat(newText2))}
           />
         </View>
-        <View style={{marginTop: '5%', width: 300}}></View>
+        <View style={{marginTop: '5%', width: 300}}>
+          <Button
+            title="Login"
+            onPress={() => this.setState({modalVisible: true})}
+          />
+        </View>
         <Modal
           animationType="none"
           transparent={false}
