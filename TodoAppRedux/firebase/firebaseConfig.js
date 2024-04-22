@@ -13,7 +13,7 @@ const firebaseConfig = {
   authDomain          :   '',
   projectId           :   'todoapp-62037',
   storageBucket       :   'todoapp-62037.appspot.com',
-  messagingSenderId   :   '89458535532',
+  messagingSenderId   :   '597211205725',
   appId               :   '1:597211205725:android:a6f6c42bc0d2fe86a6fdb4',
 
 }

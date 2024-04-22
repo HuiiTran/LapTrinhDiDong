@@ -59,6 +59,7 @@ const TodoApp = ( { todo_list, addTodo, deleteTodo, updateTodo } ) => {
   // FIREBASE FUNTIONS ****************************************************************
   const [post, setPost] = React.useState( { status: '', titleTodo: '', taskTodo: '' } )
   const [modalUpdateVisible, setModalUpdateVisible] = React.useState( false )
+  const [modalAddVisible, setModalAddVisible] = React.useState( false )
   function newTodo () { 
 
     const todoDB = collection( dbFS, 'todo-apps' )
@@ -75,7 +76,7 @@ const TodoApp = ( { todo_list, addTodo, deleteTodo, updateTodo } ) => {
       setPost( { status: '', titleTodo: '', taskTodo: '' } )
 
    } )
-
+    setModalAddVisible(false)
     Keyboard.dismiss ()
 
  }
@@ -196,13 +197,7 @@ const TodoApp = ( { todo_list, addTodo, deleteTodo, updateTodo } ) => {
       <Spacer />
       <Card>
         <Card.Content>
-          <Title>Add ToDo Here</Title>
-          <View style={ { height: 8 } } />
-          <TextInput mode="outlined" label="Task" value={ post.taskTodo } onChangeText={ ( task ) => setPost( { ...post, taskTodo: task } ) } />
-          { post.taskTodo.trim () !== '' && <View style={ { height: 8 } } /> }
-          { post.taskTodo.trim () !== '' && ( <TextInput mode="outlined" label="Title Task" value={ post.titleTodo } onChangeText={ ( title ) => setPost( { ...post, titleTodo: title } ) } /> ) }
-          { post.taskTodo.trim () !== '' && <View style={ { height: 16 } } /> }
-          { post.taskTodo.trim () !== '' && ( <Button mode="contained" onPress={ newTodo } >Add Task</Button> ) }
+        <Button onPress={ () => setModalAddVisible( true ) } >+ Add new Todo</Button>
         </Card.Content>
       </Card>
       <Spacer />
@@ -234,7 +229,7 @@ const TodoApp = ( { todo_list, addTodo, deleteTodo, updateTodo } ) => {
            )
        } ) }
       </ScrollView>
-
+       
 
       { /* Modal for updating tasks */ }
       <Modal animationType="fade" transparent={ true } visible={ modalUpdateVisible } onRequestClose={ () => setModalUpdateVisible( false ) } >
@@ -281,6 +276,16 @@ const TodoApp = ( { todo_list, addTodo, deleteTodo, updateTodo } ) => {
           </View>
          ) }
       </Modal>
+      <Modal animationType="fade"  visible={ modalAddVisible } onRequestClose={ () => setModalAddVisible( false ) } >
+        <Title>Add ToDo Here</Title>
+            <View style={ { height: 8} }/>
+            <TextInput mode="outlined" label="Task" value={ post.taskTodo } onChangeText={ ( task ) => setPost( { ...post, taskTodo: task } ) } />
+            { post.taskTodo.trim () !== '' && <View style={ { height: 8 } } /> }
+            { post.taskTodo.trim () !== '' && ( <TextInput mode="outlined" label="Title Task" value={ post.titleTodo } onChangeText={ ( title ) => setPost( { ...post, titleTodo: title } ) } /> ) }
+            { post.taskTodo.trim () !== '' && <View style={ { height: 16 } } /> }
+            { post.taskTodo.trim () !== '' && ( <Button mode="contained" onPress={ newTodo } >Add Task</Button> ) }
+            <Button style={{marginTop: '5%', backgroundColor: 'rgba(52, 52, 52, 0.3)'}} onPress={ () => setModalAddVisible( false ) }>Cancel</Button>
+       </Modal>
     </View>
    )
  }
